@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>jotter</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>jotter</h1>
+      <nav aria-label="Main">
+        <a href="/">Notes</a>
+      </nav>
+    </header>
+
+    <main>
+      <form id="new-note" class="composer">
+        <input id="title" type="text" placeholder="Title" />
+        <label for="body">Note</label>
+        <textarea id="body" rows="4"></textarea>
+        <button type="submit" class="primary">Save</button>
+      </form>
+
+      <section aria-labelledby="notes-heading">
+        <h2 id="notes-heading">Your notes</h2>
+        <div id="notes"></div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
