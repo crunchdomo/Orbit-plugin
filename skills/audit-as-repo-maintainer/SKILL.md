@@ -88,6 +88,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 6. **Convention drift from one-offs** — Plan introduces a "slightly different" naming pattern because it "makes more sense here." Now there are two patterns. Unless the new pattern is genuinely better AND you plan to migrate everything, match the existing convention.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-repo-maintainer.md`:
@@ -115,10 +119,6 @@ Write the report to `reviews/audit-as-repo-maintainer.md`:
 ## Recommendations
 | # | Issue | Why | Fix |
 |---|-------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Convention Compliance Checklist
 | Convention | Status | Notes |

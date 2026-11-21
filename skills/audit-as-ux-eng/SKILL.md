@@ -75,6 +75,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 7. **Inconsistent interaction patterns** — The rest of the product uses click-to-expand, but this plan uses hover-to-reveal. Users build muscle memory; breaking patterns costs them.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-ux-eng.md`:
@@ -102,10 +106,6 @@ Write the report to `reviews/audit-as-ux-eng.md`:
 ## Recommendations
 | # | Issue | Impact | Fix |
 |---|-------|--------|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Interaction Consistency Check
 [Does this match existing patterns? Where does it deviate?]

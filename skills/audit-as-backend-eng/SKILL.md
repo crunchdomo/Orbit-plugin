@@ -78,6 +78,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 6. **Path not joined safely** — Plan joins user-provided path segments onto a base path without canonicalizing. A `../` in the input escapes the intended directory.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-backend-eng.md`:
@@ -105,10 +109,6 @@ Write the report to `reviews/audit-as-backend-eng.md`:
 ## Recommendations
 | # | Issue | File(s) | Why | Fix |
 |---|-------|---------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Error Path Analysis
 [Trace every error from origin through propagation to user-facing output. Where are errors lost or unhelpful?]

@@ -129,15 +129,16 @@ Use the Skill tool:
 
 Follow the skill's analysis instructions completely — read files, check gotchas, evaluate through the lens.
 
-**IMPORTANT: Do NOT let the lens write a separate report file.** Instead, collect all findings from each lens and hold them for Phase 3. If a lens writes to a file, that's fine as intermediate work, but the FINAL output is ONE combined document.
+**Do not let the lens write its own report file, and skip its Plan Summary and Files Reviewed sections.** Under this orchestrator a lens only has to hand back what is listed next.
 
 ### Step: Record findings
-After each lens completes, capture:
-- Lens name and verdict
-- Critical issues (full detail)
-- Recommendations (full detail)
-- Nice-to-haves
-- The signature section output (Visual State Coverage, User Journey Map, etc.)
+After each lens completes, keep exactly four things:
+- Its verdict
+- Its critical issues, each with a file and line, and one sentence saying what breaks and when
+- Its recommendations, each with a file and line
+- Its signature section (Visual State Coverage, User Journey Map, Resource Budget and so on)
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. If a lens calls something critical that is none of those, record it as a recommendation. A critical issue with no file and line, or no failure sentence, is dropped.
 
 ### Step: Continue to next lens
 
@@ -147,7 +148,7 @@ After each lens completes, capture:
 
 After ALL lenses have completed, write **ONE file**: `reviews/audit-plan-full.md`
 
-This document contains EVERYTHING — the master summary at the top, then the FULL output of each lens under its own heading. Not summaries — the complete lens output.
+Every issue appears **once**, in the master tables at the top. The lens sections below them carry only what the tables cannot: the verdict and the signature section. Do not repeat issues under each lens.
 
 ### Document Structure
 
@@ -157,131 +158,53 @@ This document contains EVERYTHING — the master summary at the top, then the FU
 **Date**: [current date]
 **Mode**: [Plan / Uncommitted Changes / Branch vs Main / Repo Health]
 **Source**: [plan path OR branch name OR "working tree"]
+**Stack**: [the stack brief]
 **Lenses Run**: [N]/10
 **Lenses Skipped**: [list with reasons]
 
----
-
 ## Master Verdict: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
 
-[2-3 sentence justification synthesizing across ALL lenses.]
+[2-3 sentences across ALL lenses.]
 
 ## Verdict by Lens
 
 | # | Lens | Verdict | Critical | Recommendations |
 |---|------|---------|----------|-----------------|
 
-## All Critical Issues (Must Fix)
+## Critical Issues (Must Fix)
 
-Collected from every lens, deduplicated, ordered by severity:
+Deduplicated, ordered by severity:
 
-| # | Issue | Lens(es) | File(s) | Impact | Fix |
-|---|-------|----------|---------|--------|-----|
+| # | Issue | Lens(es) | File:line | What breaks, and when | Fix |
+|---|-------|----------|-----------|-----------------------|-----|
 
 ## Cross-Cutting Concerns
 
-Issues flagged by 2+ lenses — systemic problems:
+Issues flagged by 2+ lenses:
 
 | Concern | Flagged By | Root Cause | Unified Fix |
 |---------|-----------|------------|-------------|
 
-## All Recommendations
+## Recommendations
 
-| # | Recommendation | Lens | File(s) | Fix |
-|---|---------------|------|---------|-----|
+Deduplicated, most valuable first. At most 15: if there are more, keep the 15 that matter most and end with one line saying how many were left out.
+
+| # | Recommendation | Lens(es) | File:line | Fix |
+|---|---------------|----------|-----------|-----|
 
 ---
 
 # Lens Reports
 
----
-
-## 1. Design Engineer
+## N. [Lens Name]
 
 **Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
 
-[FULL lens output here — everything the design engineer found, including:
-- Files reviewed table
-- Critical issues table
-- Recommendations table
-- Design System Compliance section
-- Visual State Coverage matrix
-- Verdict Details (Token Fidelity, State Coverage, Dark Mode, Animation, Consistency)]
-
----
-
-## 2. UX Engineer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — User Journey Map, issues, recommendations, Interaction Consistency Check, Verdict Details]
-
----
-
-## 3. Frontend Engineer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Render Path Analysis, Type Safety Assessment, issues, recommendations, Verdict Details]
-
----
-
-## 4. Backend Engineer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Error Path Analysis, Resource Lifecycle Audit table, issues, recommendations, Verdict Details]
-
----
-
-## 5. Structural Engineer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Dependency Map, Boundary Crossing Analysis, issues, recommendations, Verdict Details]
-
----
-
-## 6. Repo Maintainer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Convention Compliance Checklist, Reuse Opportunities, issues, recommendations, Verdict Details]
-
----
-
-## 7. Production Readiness
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Failure Mode Analysis table, Environment Checklist, issues, recommendations, Verdict Details]
-
----
-
-## 8. DX Engineer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Error Message Audit table, Developer Journey, issues, recommendations, Verdict Details]
-
----
-
-## 9. Performance Engineer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Resource Budget table, Hot Path Analysis, issues, recommendations, Verdict Details]
-
----
-
-## 10. Accessibility Engineer
-
-**Verdict**: [APPROVE / APPROVE WITH CHANGES / NEEDS REWORK]
-
-[FULL lens output — Keyboard Navigation Walkthrough, ARIA Checklist, issues, recommendations, Verdict Details]
+[The lens's signature section only.]
 ```
 
-**For skipped lenses:** Include a brief entry:
+Repeat the last block for each lens that ran. For a skipped lens:
+
 ```markdown
 ## N. [Lens Name]
 
@@ -297,15 +220,15 @@ After writing the document:
 1. Print: `Full spectrum audit written to reviews/audit-plan-full.md`
 2. Print the **Master Verdict**
 3. Print the **Verdict by Lens** table
-4. Print the **All Critical Issues** table
+4. Print the **Critical Issues** table
 5. Print the **Cross-Cutting Concerns** table
 
 ## Policies
 
 - **ONE file.** Everything goes into `reviews/audit-plan-full.md`. No separate lens files.
-- **Full lens output, not summaries.** Each lens section contains the COMPLETE analysis — tables, checklists, verdict details, everything.
+- **Every issue once.** Issues live in the master tables; lens sections hold the verdict and signature section.
 - **Every lens runs independently.** Don't let findings from Lens 1 bias Lens 5.
-- **Deduplication in the master section.** Critical issues and recommendations that appear in multiple lenses get listed once in the master tables with all source lenses noted. Each individual lens section still contains its own full findings.
 - **Cross-cutting concerns are the gold.** If 2+ lenses flag related issues, elevate it.
 - **The master verdict is not a vote.** One critical NEEDS REWORK can override nine APPROVEs.
+- **Nothing found is a result.** A lens with no issues says so in one line.
 - **Repo mode is code review, not plan review.** Findings reference specific lines, functions, and patterns in actual files.

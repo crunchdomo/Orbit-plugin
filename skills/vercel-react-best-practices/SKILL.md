@@ -124,4 +124,4 @@ Each rule file contains:
 
 ## Full Compiled Document
 
-For the complete guide with all rules expanded: `AGENTS.md`
+Each rule file under `rules/` is complete on its own; read only the ones the task needs.

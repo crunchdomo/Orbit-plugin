@@ -79,6 +79,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 7. **File watcher too broad** — Plan watches the entire project root for changes when it only cares about one subdirectory. File system events fire for every dependency or build-output change.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-perf-eng.md`:
@@ -106,10 +110,6 @@ Write the report to `reviews/audit-as-perf-eng.md`:
 ## Recommendations
 | # | Issue | File(s) | Why | Fix |
 |---|-------|---------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Resource Budget
 | Resource | Current | After Plan | Concern? |

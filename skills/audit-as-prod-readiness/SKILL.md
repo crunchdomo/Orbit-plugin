@@ -90,6 +90,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 7. **Build artifact not in the shipped package** — Plan adds a new asset or binary but doesn't update the packaging configuration or build scripts. Works in dev (file is in the source tree), breaks in production (not packaged).
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-prod-readiness.md`:
@@ -117,10 +121,6 @@ Write the report to `reviews/audit-as-prod-readiness.md`:
 ## Recommendations
 | # | Issue | Why | Fix |
 |---|-------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Failure Mode Analysis
 | Scenario | What Fails | User Impact | Recovery | Plan Handles It? |

@@ -75,6 +75,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 7. **Missing adapter for alternative implementations** — The project supports more than one implementation of the same role. Plan adds a feature that only works with one and doesn't go through the adapter layer.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-structural-eng.md`:
@@ -102,10 +106,6 @@ Write the report to `reviews/audit-as-structural-eng.md`:
 ## Recommendations
 | # | Issue | Why | Fix |
 |---|-------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Dependency Map
 [ASCII or description of how the new code connects to the existing system. Highlight any concerning dependency arrows.]
