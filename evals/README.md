@@ -5,6 +5,7 @@ A check that the audit still finds real defects after the skills are changed.
 - `fixture/` — jotter, a small Python service with a web page. It has 20 planted defects (two per original lens) and three clean control files.
 - `expected.md` — the answer key and scoring rules. Half the defects are a hold-out set.
 - `baseline/` — three runs of the unmodified upstream plugin (commit `db14d72`) and their scores.
+- `runs/` — one run per later change, and the running score table.
 
 ## Running a check
 

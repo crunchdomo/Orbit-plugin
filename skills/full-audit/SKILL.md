@@ -64,22 +64,24 @@ No specific diff — each lens reads the codebase broadly. Focus on recent files
 **Plan mode:** Read the plan document completely.
 **Repo mode:** Read all changed files and the diff.
 
-Then determine which of the 10 lenses are **relevant**.
+Then write a **stack brief**: five lines at most, from the project's manifests (`pyproject.toml`, `package.json`, `Cargo.toml`, `go.mod` and the like) and its `CLAUDE.md` or README. State the languages, the frameworks, how it runs (service, CLI, library, desktop or web app), where the UI lives if there is one, and any conventions the project documents. Every lens audits in the terms of this brief.
+
+Then determine which of the 10 lenses are **relevant**. Judge by what the code does, never by which language or framework it uses.
 
 **Relevance rules:**
 
 | Lens | Skip when... |
 |------|-------------|
-| Design Engineer | Backend-only, no UI changes |
-| UX Engineer | No user-facing behavior changes |
-| Frontend Engineer | No React/TS/CSS changes |
-| Backend Engineer | No Rust/Tauri changes |
+| Design Engineer | No UI in scope |
+| UX Engineer | No user-facing behavior in scope |
+| Frontend Engineer | No client-side UI code in scope |
+| Backend Engineer | No server, service, data-access or systems code in scope |
 | Structural Engineer | Single-file change, no new modules |
 | Repo Maintainer | Never skip |
 | Production Readiness | Never skip |
-| DX Engineer | No user-facing behavior changes |
-| Performance Engineer | No new state, listeners, IPC, or I/O |
-| Accessibility Engineer | No interactive UI changes |
+| DX Engineer | No CLI, API, config or error output in scope |
+| Performance Engineer | No new state, listeners, cross-boundary calls, or I/O |
+| Accessibility Engineer | No interactive UI in scope |
 
 After reading, announce:
 - Which lenses will run (and why)
@@ -281,7 +283,7 @@ Issues flagged by 2+ lenses — systemic problems:
 ```markdown
 ## N. [Lens Name]
 
-**Skipped** — [reason, e.g., "No Rust/Tauri changes in this plan"]
+**Skipped** — [reason, e.g., "No server or data-access code in scope"]
 ```
 
 ---

@@ -17,14 +17,18 @@ This is NOT a visual design audit. You don't care if the padding is 8px or 12px.
 - **Feedback & status** — Does the system tell the user what's happening at every step?
 - **Error recovery** — When the user makes a mistake, how do they get back on track?
 - **Progressive disclosure** — Is complexity revealed gradually, or dumped all at once?
-- **Consistency** — Does this interaction pattern match how similar things work elsewhere in the app?
+- **Consistency** — Does this interaction pattern match how similar things work elsewhere in the product?
 - **Reversibility** — Can the user undo this? What are the consequences of the action?
+
+## Stack
+
+This lens is stack-neutral. Before auditing, establish what the project is built with: use the stack brief if the orchestrator gave you one; otherwise read the project's manifests (`pyproject.toml`, `package.json`, `Cargo.toml`, `go.mod` and the like) and its `CLAUDE.md` or README. Apply every question below in that stack's terms, and add the failure patterns you know are typical of it.
 
 ## Process
 
 1. **Read the plan** — but imagine you're a user encountering this for the first time
 2. **Map the user journey** — what triggers this? What steps does the user take? Where do they end up?
-3. **Read existing interaction patterns** — how do similar flows work in this app?
+3. **Read existing interaction patterns** — how do similar flows work in this product?
 4. **Find the friction points** — where will users get confused, stuck, or surprised?
 5. **Write the report**
 
@@ -48,7 +52,7 @@ This is NOT a visual design audit. You don't care if the padding is 8px or 12px.
 ### Edge Cases (User Perspective)
 - First-time user: no prior context, no saved data, empty states
 - Power user: keyboard shortcuts, bulk operations, repeated workflows
-- Interrupted user: browser/app crash, tab switch, session timeout
+- Interrupted user: crash, tab or window switch, session timeout
 
 ### Destructive Actions
 - Is there a confirmation step for irreversible actions?
@@ -69,7 +73,7 @@ This is NOT a visual design audit. You don't care if the padding is 8px or 12px.
 
 6. **Context loss on navigation** — User fills out a form, navigates away accidentally, comes back — all input is gone. Plans rarely address this.
 
-7. **Inconsistent interaction patterns** — The rest of the app uses click-to-expand, but this plan uses hover-to-reveal. Users build muscle memory; breaking patterns costs them.
+7. **Inconsistent interaction patterns** — The rest of the product uses click-to-expand, but this plan uses hover-to-reveal. Users build muscle memory; breaking patterns costs them.
 
 ## Output Format
 

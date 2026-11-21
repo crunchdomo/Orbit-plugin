@@ -19,6 +19,10 @@ You don't care if the code is elegant. You care if it survives.
 - **Rollback safety** — If this deployment goes wrong, can we roll back without data loss?
 - **Observability** — If something breaks in production, can we figure out what happened?
 
+## Stack
+
+This lens is stack-neutral. Before auditing, establish what the project is built with: use the stack brief if the orchestrator gave you one; otherwise read the project's manifests (`pyproject.toml`, `package.json`, `Cargo.toml`, `go.mod` and the like) and its `CLAUDE.md` or README. Apply every question below in that stack's terms, and add the failure patterns you know are typical of it.
+
 ## Process
 
 1. **Read the plan** — think about what happens when things go wrong, not just when they go right
@@ -34,57 +38,57 @@ You don't care if the code is elegant. You care if it survives.
 - Does it assume specific file paths that only exist in development?
 - Are there dev-only flags that could accidentally ship?
 - Does it use environment variables? Are they documented? Are there defaults?
-- Does the Tauri build configuration match development assumptions?
+- Does the production build or packaging configuration match development assumptions?
 
 ### Error Recovery
 - If the operation fails midway, is the system in a consistent state?
 - Are there retry mechanisms for transient failures?
 - Are retries bounded? (No infinite retry loops)
-- Is there a timeout for every network/IPC call?
-- What happens if the user force-quits during a critical operation?
+- Is there a timeout for every network or cross-process call?
+- What happens if the process is killed during a critical operation?
 
 ### Data Integrity
 - Are writes atomic? (Write to temp -> rename, not write in place)
-- If the app crashes during a write, is the data recoverable?
-- Are there concurrent access guards? (Two windows, two sessions)
+- If the process crashes during a write, is the data recoverable?
+- Are there concurrent access guards? (Two instances, two sessions)
 - Does the plan handle data migration from the previous version?
 - Can the new code read data written by the old code?
 
 ### Process Lifecycle
-- Are spawned processes cleaned up on app exit?
-- What happens if a sidecar process crashes? Is there restart logic?
+- Are spawned child processes cleaned up on exit?
+- What happens if a helper or worker process crashes? Is there restart logic?
 - Are health checks in place for critical dependencies?
-- Does the plan handle the app going to sleep / waking up?
-- What happens when the OS terminates the app (low memory, shutdown)?
+- Does the plan handle the host going to sleep / waking up?
+- What happens when the OS terminates the process (low memory, shutdown)?
 
 ### Deployment & Rollback
 - Does the plan require a specific build order?
 - Are there database/schema migrations? Are they backward-compatible?
 - If we need to roll back, does the old code work with the new data?
 - Are there feature flags for gradual rollout?
-- Does the Tauri build pipeline handle the new assets/binaries?
+- Does the build and packaging pipeline include the new assets/binaries?
 
 ### Observability
 - Are errors logged with enough context to debug remotely?
-- Is structured logging used (not console.log)?
+- Is structured logging used (not ad hoc print statements)?
 - Are critical operations traced (start/success/failure)?
 - Can we distinguish between user errors and system errors in logs?
 
 ## Gotchas
 
-1. **"Works in dev, breaks in prod"** — Plan relies on Vite dev server behavior that doesn't exist in the production bundle. Hot module replacement, dev-only environment variables, localhost CORS.
+1. **"Works in dev, breaks in prod"** — Plan relies on dev-server behavior that doesn't exist in the production build. Hot reload, dev-only environment variables, localhost CORS.
 
-2. **No timeout on IPC** — Plan makes a Tauri invoke call with no timeout. If the Rust backend is blocked (mutex, I/O), the frontend hangs forever with no feedback.
+2. **No timeout on cross-process calls** — Plan makes a call to another process or service with no timeout. If the other side is blocked (lock, I/O), the caller hangs forever with no feedback.
 
-3. **Partial write corruption** — Plan writes a JSON file without atomicity. App crash during write -> corrupted file -> app can't start. Always write to temp file, then rename.
+3. **Partial write corruption** — Plan writes a data file without atomicity. Crash during write -> corrupted file -> app can't start. Always write to temp file, then rename.
 
-4. **Missing sidecar restart** — Plan starts the agent-bridge sidecar but has no health check or restart logic. If the sidecar crashes, the entire agent feature is dead until app restart.
+4. **Missing helper process restart** — Plan starts a helper or worker process but has no health check or restart logic. If it crashes, the feature that depends on it is dead until the whole application restarts.
 
 5. **"Delete then recreate" pattern** — Plan deletes old data before writing new data. If the write fails, both old and new data are gone. Write new first, then delete old.
 
 6. **Assumption about filesystem** — Plan assumes a directory exists, file is writable, or path is valid without checking. Production environments surprise you.
 
-7. **Build artifact not in Tauri bundle** — Plan adds a new asset or binary but doesn't update `tauri.conf.json` or the build scripts. Works in dev (file is in the source tree), breaks in production (not bundled).
+7. **Build artifact not in the shipped package** — Plan adds a new asset or binary but doesn't update the packaging configuration or build scripts. Works in dev (file is in the source tree), breaks in production (not packaged).
 
 ## Output Format
 
