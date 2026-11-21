@@ -1,6 +1,6 @@
 ---
 name: audit-as-repo-maintainer
-description: Audit an implementation plan through the eyes of a Repo Maintainer. Use this skill when the user says "audit as repo maintainer", "review conventions", "check code hygiene", "review the file structure", or any plan where you want to verify it follows the project's established patterns — barrel exports, file placement, naming conventions, import ordering, style reuse, code deduplication, and lint compliance. This lens catches the slow erosion of codebase health that individual feature reviews miss because each violation seems minor in isolation.
+description: Audit an implementation plan through the eyes of a Repo Maintainer. Use this skill when the user says "audit as repo maintainer", "review conventions", "check code hygiene", "review the file structure", or any plan where you want to verify it follows the project's established patterns — export and module conventions, file placement, naming conventions, import ordering, style reuse, code deduplication, and lint compliance. This lens catches the slow erosion of codebase health that individual feature reviews miss because each violation seems minor in isolation.
 ---
 
 # Audit as Repo Maintainer
@@ -13,13 +13,17 @@ A single convention violation is harmless. A hundred is a codebase nobody wants 
 
 - **File placement** — Is the new code where developers would expect to find it?
 - **Naming consistency** — Do names follow the patterns established by neighboring files?
-- **Barrel exports** — Are new public APIs exported through index.ts files?
-- **Import hygiene** — Type imports separated? Path aliases used? Order correct?
+- **Export and module conventions** — Does it follow the project's established export/module convention?
+- **Import hygiene** — Are imports grouped, ordered, and aliased the way the project does it?
 - **Code reuse** — Is the plan duplicating something that already exists?
-- **Style reuse** — Are Tailwind classes, design tokens, and component variants used instead of one-off styles?
+- **Style reuse** — Are existing styles, design tokens, and component variants used instead of one-off styles?
 - **Dead code prevention** — Does the plan remove what it replaces, or leave dead code behind?
-- **Documentation** — Does a new directory need a CLAUDE.md?
-- **Lint compliance** — Will the code pass the project's ESLint and Clippy rules without suppressions?
+- **Documentation** — Does a new directory need a README or equivalent?
+- **Lint compliance** — Will the code pass the project's configured linters and checks without suppressions?
+
+## Stack
+
+This lens is stack-neutral. Before auditing, establish what the project is built with: use the stack brief if the orchestrator gave you one; otherwise read the project's manifests (`pyproject.toml`, `package.json`, `Cargo.toml`, `go.mod` and the like) and its `CLAUDE.md` or README. Apply every question below in that stack's terms, and add the failure patterns you know are typical of it.
 
 ## Process
 
@@ -32,62 +36,57 @@ A single convention violation is harmless. A hundred is a codebase nobody wants 
 ## What to Look For
 
 ### File Placement
-- Components in `components/`, hooks in `hooks/`, stores in `stores/`, types in `types/`?
-- Is the subdirectory correct? (e.g., browser-related hooks in `hooks/browser/`)
-- Does the filename match the convention? (kebab-case for files, PascalCase for components)
-- If creating a new directory, is a CLAUDE.md needed?
+- Does each new file live in the directory the project's layout prescribes for its kind?
+- Is the subdirectory correct, matching how neighboring files are grouped?
+- Does the filename match the project's naming convention?
+- If creating a new directory, does it need a README or equivalent?
 
-### Barrel Exports
-- Does every directory with multiple public files have an `index.ts`?
-- Are new exports added to the nearest barrel file?
-- Is the plan importing from specific files or through barrels? (Match the project convention)
+### Export & Module Conventions
+- Are new public items exposed the way the project exposes others? (index files, package exports, module declarations, or no indirection at all)
+- Are old exports cleaned up where the plan replaces them?
+- Is the plan importing the way the project convention says? (from specific files or through a public entry point)
 
 ### Import Style
-- Are type imports using `import type { X }` syntax?
-- Is import ordering correct? (External -> Types -> Internal, alphabetized within groups)
-- Are path aliases used (`@/` prefixed) instead of relative paths?
-- Run `bun run lint:fix` mentally — if unsure about ordering, it probably needs fixing
+- Is import ordering correct, matching the project's linter or style guide?
+- Are the project's path aliases or absolute-import conventions used instead of long relative paths?
+- Run the project's formatter and linter mentally — if unsure about ordering, it probably needs fixing
 
 ### Code Reuse
-- Is the plan creating a new utility that already exists in `lib/` or `apps/common/`?
+- Is the plan creating a new utility that already exists in the project's shared code?
 - Is the plan creating a new component that's a slight variation of an existing one?
 - Could a shared abstraction serve both the existing code and the new code?
 - But also: is the plan over-abstracting? Three similar lines are better than a premature abstraction.
 
 ### Style Reuse
-- Are Tailwind classes used for styling (not inline style objects for static values)?
+- Does styling use the project's established mechanism (not inline styles for static values)?
 - Are colors from the design token system, not hardcoded values?
 - Are common patterns using shared component variants (e.g., Button variants, not custom styled buttons)?
-- No dynamic Tailwind classes — use inline styles for dynamic values
 
 ### Dead Code
 - Does the plan remove code it replaces, or leave the old code alongside the new?
-- Are old exports cleaned up from barrel files?
+- Are old exports cleaned up?
 - Are old type definitions removed when replaced by new ones?
-- Think about `bun run knip` — would the new code introduce unused exports?
+- Would the project's unused-code tooling flag the new code? (unused exports, unused dependencies)
 
 ### Lint & Type Compliance
-- Will this pass `bun run check`? (TypeScript strict + ESLint zero warnings)
-- No `any`, no `@ts-ignore`, no `eslint-disable`?
-- No `console.log` — uses structured logger?
-- No `.unwrap()` or `.expect()` in Rust?
-- Explicit return types on functions?
+- Will this pass the project's lint, format, and type-check commands with zero warnings?
+- No lint or type-check suppressions, and no escape hatches that defeat the type system?
+- No ad-hoc debug printing — uses the project's logger?
+- Are types and signatures annotated to the level the project requires?
 
 ## Gotchas
 
 1. **"I'll clean it up later"** — Plan leaves the old implementation alongside the new one "for now." It never gets cleaned up. Insist on removal in the same PR.
 
-2. **Barrel export forgotten** — Plan creates a new hook/component/store but never adds it to the directory's index.ts. Other developers won't find it.
+2. **Export registration forgotten** — Plan creates a new public item but never exposes it the way its neighbors are exposed. Other developers won't find it.
 
-3. **Type import mixed with value import** — Plan uses `import { type X, Y }` or `import { X } from './types'`. This project separates: `import type { X }` and `import { Y }` as separate statements.
+3. **Util in the wrong place** — Plan puts a general utility in a feature-specific directory. Should it be in the project's shared location?
 
-4. **Util in the wrong place** — Plan puts a general utility in a feature-specific directory. Should it be in `lib/` or `apps/common/`?
+4. **Copy-paste with slight modification** — Plan duplicates an existing component and tweaks it. Often the right answer is to add a variant or parameter to the original.
 
-5. **Copy-paste with slight modification** — Plan duplicates an existing component and tweaks it. Often the right answer is to add a variant or prop to the original.
+5. **Ad-hoc logging** — Plan uses raw print or console output for debugging or diagnostics. Use the project's logger.
 
-6. **Missing structured logger** — Plan uses `console.log` for debugging or diagnostics. This project uses `createLogger('Name')` from `@/lib/logger`.
-
-7. **Convention drift from one-offs** — Plan introduces a "slightly different" naming pattern because it "makes more sense here." Now there are two patterns. Unless the new pattern is genuinely better AND you plan to migrate everything, match the existing convention.
+6. **Convention drift from one-offs** — Plan introduces a "slightly different" naming pattern because it "makes more sense here." Now there are two patterns. Unless the new pattern is genuinely better AND you plan to migrate everything, match the existing convention.
 
 ## Output Format
 
@@ -126,14 +125,13 @@ Write the report to `reviews/audit-as-repo-maintainer.md`:
 |-----------|--------|-------|
 | File placement | | |
 | Naming conventions | | |
-| Barrel exports | | |
+| Export/module convention | | |
 | Import ordering | | |
-| Type imports separated | | |
 | Path aliases used | | |
 | No dead code left | | |
 | Structured logging | | |
 | No lint suppressions | | |
-| CLAUDE.md present | | |
+| Docs for new directories | | |
 
 ## Reuse Opportunities
 [Existing code that could replace something the plan creates]

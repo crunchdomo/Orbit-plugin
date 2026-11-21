@@ -56,13 +56,13 @@ Most code reviews are generalist — one person (or one AI) trying to catch ever
 |---|-------|--------|----------------|
 | 1 | `audit-as-design-eng` | Design Engineer | Visual hierarchy, design token fidelity, dark mode parity, interactive states, animation quality |
 | 2 | `audit-as-ux-eng` | UX Engineer | User journey gaps, broken mental models, missing feedback, discoverability, error recovery |
-| 3 | `audit-as-frontend-eng` | Frontend Engineer | React anti-patterns, Zustand pitfalls, type safety gaps, unnecessary re-renders, bundle bloat |
-| 4 | `audit-as-backend-eng` | Backend Engineer | Rust error handling, concurrency hazards, resource leaks, IPC mismatches, file system safety |
+| 3 | `audit-as-frontend-eng` | Frontend Engineer | UI framework anti-patterns, state management pitfalls, type safety gaps, wasted renders, bundle bloat |
+| 4 | `audit-as-backend-eng` | Backend Engineer | Error handling, concurrency hazards, resource leaks, API contract mismatches, file system safety |
 | 5 | `audit-as-structural-eng` | Structural Architect | Module coupling, dependency direction, layer violations, abstraction mismatches, circular deps |
 | 6 | `audit-as-repo-maintainer` | Repo Maintainer | Convention drift, missing barrel exports, naming inconsistency, dead code, import hygiene |
 | 7 | `audit-as-prod-readiness` | Production Engineer | Dev/prod parity, missing error recovery, data integrity, rollback safety, deployment gaps |
 | 8 | `audit-as-dx-eng` | DX Engineer | Error message quality, CLI ergonomics, keyboard-first design, config defaults, developer flow |
-| 9 | `audit-as-perf-eng` | Performance Engineer | Memory accumulation, IPC latency, streaming bottlenecks, startup impact, long-session stability |
+| 9 | `audit-as-perf-eng` | Performance Engineer | Memory accumulation, cross-boundary latency, streaming bottlenecks, startup impact, long-run stability |
 | 10 | `audit-as-a11y-eng` | Accessibility Engineer | Screen reader compatibility, keyboard navigation, focus management, ARIA compliance, contrast |
 
 Each lens includes a **Gotchas** section — the most common failures Claude makes from that perspective — and a **Signature Section** that only that expert produces (e.g., Visual State Coverage matrix, Keyboard Navigation Walkthrough, Resource Budget table).
