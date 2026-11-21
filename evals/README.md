@@ -14,3 +14,11 @@ A check that the audit still finds real defects after the skills are changed.
 3. Score the report against `expected.md` and compare with `baseline/scores.md`.
 
 Run once per change. Run three times at baseline and at the end; a one-defect difference between runs is noise.
+
+## Project gotchas check
+
+Checks that a lens picks up a project's own `## Audit gotchas` from its `CLAUDE.md`.
+
+1. Copy `fixture/` outside the repo and drop `gotchas-check/CLAUDE.md` into the copy's root.
+2. Run the Backend lens on the copy.
+3. Pass: it flags the `time.time()` calls in `app/store.py`. No baseline run ever raised them, so a hit comes from the gotcha, not from general knowledge.
