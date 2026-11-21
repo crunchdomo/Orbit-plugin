@@ -74,6 +74,10 @@ These are the most common design engineering failures in plan audits:
 
 6. **Inconsistent border-radius** — New components using different radius values than their neighbors. Check existing patterns first.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-design-eng.md`:
@@ -101,10 +105,6 @@ Write the report to `reviews/audit-as-design-eng.md`:
 ## Recommendations
 | # | Issue | File(s) | Why | Fix |
 |---|-------|---------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Design System Compliance
 [Are design tokens used correctly? Any visual fragmentation introduced?]

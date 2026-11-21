@@ -89,6 +89,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 7. **`tabindex` overuse** — Plan removes elements from tab order that should be focusable (`tabindex="-1"` on buttons), or adds `tabindex="0"` to non-interactive elements. Be intentional about tab order changes.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-a11y-eng.md`:
@@ -116,10 +120,6 @@ Write the report to `reviews/audit-as-a11y-eng.md`:
 ## Recommendations
 | # | Issue | WCAG Criterion | Fix |
 |---|-------|---------------|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Keyboard Navigation Walkthrough
 | Step | Action | Expected Focus | Expected Announcement | Plan Handles? |

@@ -80,6 +80,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 7. **Breaking change without migration path** — Plan changes a config format or CLI flag without explaining how to migrate from the old format. Users with muscle memory will be frustrated.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-dx-eng.md`:
@@ -107,10 +111,6 @@ Write the report to `reviews/audit-as-dx-eng.md`:
 ## Recommendations
 | # | Issue | Why | Fix |
 |---|-------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Error Message Audit
 | Error Scenario | Current Message | What Developer Needs | Suggested Message |

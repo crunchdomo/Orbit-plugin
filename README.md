@@ -118,13 +118,13 @@ Not every lens applies to every plan. The orchestrator reads your plan/changes a
 Everything consolidates into one file: `reviews/audit-plan-full.md`
 
 ```
-Master Verdict + Cross-Cutting Concerns + All Critical Issues
+Master Verdict + every issue once + Cross-Cutting Concerns
 ──────────────────────────────────────────────────────────────
-## 1. Design Engineer         ← full analysis
-## 2. UX Engineer             ← full analysis
-## 3. Frontend Engineer       ← full analysis
+## 1. Design Engineer         ← verdict and signature section
+## 2. UX Engineer             ← verdict and signature section
+## 3. Frontend Engineer       ← verdict and signature section
 ...
-## 10. Accessibility Engineer ← full analysis
+## 10. Accessibility Engineer ← verdict and signature section
 ```
 
 The **Cross-Cutting Concerns** section is where the real value lives — issues flagged by multiple independent lenses are systemic problems, not isolated nitpicks.

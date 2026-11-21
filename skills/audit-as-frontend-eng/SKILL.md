@@ -77,6 +77,10 @@ This lens is stack-neutral. Before auditing, establish what the project is built
 
 7. **Over-memoization** — Plan wraps everything in memoization. Memoization has a cost. Only memoize when: (a) the computation is expensive, (b) the result is passed as a prop to a memoized child, or (c) it's a stable callback for an effect dependency.
 
+## Severity
+
+A critical issue is a bug, data loss, an outage, a security hole, or a user who cannot complete a task. Everything else is a recommendation. Finding nothing is a valid result: never fill a table to fill it.
+
 ## Output Format
 
 Write the report to `reviews/audit-as-frontend-eng.md`:
@@ -104,10 +108,6 @@ Write the report to `reviews/audit-as-frontend-eng.md`:
 ## Recommendations
 | # | Issue | File(s) | Why | Fix |
 |---|-------|---------|-----|-----|
-
-## Nice-to-Haves
-| # | Suggestion | Rationale |
-|---|------------|-----------|
 
 ## Render Path Analysis
 [Trace: What triggers renders? What re-renders downstream? Where are unnecessary renders?]
