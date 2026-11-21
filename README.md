@@ -50,6 +50,23 @@ Most code reviews are generalist — one person (or one AI) trying to catch ever
 
 ---
 
+## Teaching it your project
+
+The lenses know no stack in advance. Each run reads your manifests and `CLAUDE.md` to work out what the project is built with.
+
+For the things no outsider would guess, add a section to your project's `CLAUDE.md`:
+
+```markdown
+## Audit gotchas
+
+- Timestamps are written through `store.now()`, never `time.time()`: the mobile client truncates floats and reorders notes.
+- Migrations must be reversible; we roll back by running the previous release.
+```
+
+Every relevant lens checks each item. Use it for past incidents and house conventions, not for general good practice the lenses already cover.
+
+---
+
 ## The 10 Lenses
 
 | # | Skill | Expert | What They Catch |

@@ -66,6 +66,8 @@ No specific diff — each lens reads the codebase broadly. Focus on recent files
 
 Then write a **stack brief**: five lines at most, from the project's manifests (`pyproject.toml`, `package.json`, `Cargo.toml`, `go.mod` and the like) and its `CLAUDE.md` or README. State the languages, the frameworks, how it runs (service, CLI, library, desktop or web app), where the UI lives if there is one, and any conventions the project documents. Every lens audits in the terms of this brief.
 
+If the project's `CLAUDE.md` has an `## Audit gotchas` section, copy it under the brief word for word. Those are bugs and conventions the project learned the hard way, and every relevant lens checks each item.
+
 Then determine which of the 10 lenses are **relevant**. Judge by what the code does, never by which language or framework it uses.
 
 **Relevance rules:**

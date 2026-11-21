@@ -21,7 +21,7 @@ Users with disabilities use every kind of software, developer tools included. A 
 
 ## Stack
 
-This lens is stack-neutral. Before auditing, establish what the project is built with: use the stack brief if the orchestrator gave you one; otherwise read the project's manifests (`pyproject.toml`, `package.json`, `Cargo.toml`, `go.mod` and the like) and its `CLAUDE.md` or README. Apply every question below in that stack's terms, and add the failure patterns you know are typical of it.
+This lens is stack-neutral. Before auditing, establish what the project is built with: use the stack brief if the orchestrator gave you one; otherwise read the project's manifests (`pyproject.toml`, `package.json`, `Cargo.toml`, `go.mod` and the like) and its `CLAUDE.md` or README. Apply every question below in that stack's terms, and add the failure patterns you know are typical of it. If the project's `CLAUDE.md` has an `## Audit gotchas` section, check every item in it as well: those are bugs and conventions this project learned the hard way.
 
 ## Process
 
