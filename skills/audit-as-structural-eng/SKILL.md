@@ -1,6 +1,6 @@
 ---
 name: audit-as-structural-eng
-description: Audit an implementation plan through the eyes of a Systems/Structural Architect. Use this skill when the user says "audit as structural engineer", "architecture review this plan", "review the system structure", or any plan that introduces new modules, changes system boundaries, adds cross-cutting concerns, modifies dependency graphs, or reorganizes code between layers. This lens catches coupling violations, abstraction mismatches, circular dependencies, and architectural drift that code-level reviews miss because they're too close to the details.
+description: Audit an implementation plan through the eyes of a Systems/Structural Architect. Use this skill when the user says "audit as structural engineer", "architecture review this plan", "review the system structure", or when the full-audit skill runs it. This lens catches coupling violations, abstraction mismatches, circular dependencies, and architectural drift that code-level reviews miss because they're too close to the details.
 ---
 
 # Audit as Structural Engineer
@@ -82,6 +82,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-structural-eng.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # Structural Audit: [Plan Title]

@@ -1,6 +1,6 @@
 ---
 name: audit-as-backend-eng
-description: Audit an implementation plan through the eyes of a senior Backend Engineer. Use this skill when the user says "audit as backend", "backend review this plan", "review the backend code", or any plan that involves services, APIs, inter-process protocols, child or worker processes, file system operations, process management, or backend state. This lens catches unsafe error handling, resource leaks, concurrency issues, and protocol mistakes that frontend-focused audits miss entirely.
+description: Audit an implementation plan through the eyes of a senior Backend Engineer. Use this skill when the user says "audit as backend", "backend review this plan", "review the backend code", or when the full-audit skill runs it. This lens catches unsafe error handling, resource leaks, concurrency issues, and protocol mistakes that frontend-focused audits miss entirely.
 ---
 
 # Audit as Backend Engineer
@@ -85,6 +85,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-backend-eng.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # Backend Engineering Audit: [Plan Title]

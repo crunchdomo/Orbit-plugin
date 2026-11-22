@@ -1,6 +1,6 @@
 ---
 name: audit-as-design-eng
-description: Audit an implementation plan through the eyes of a Design Engineer. Use this skill when the user says "audit as design engineer", "design review this plan", "review the design aspects", or any plan that involves UI changes, component styling, visual states, dark mode, colors, typography, spacing, or animations. Also trigger when reviewing plans that touch CSS, utility classes, design tokens, or component visual structure. This lens catches visual inconsistencies, design system violations, and craft issues that other audits miss entirely.
+description: Audit an implementation plan through the eyes of a Design Engineer. Use this skill when the user says "audit as design engineer", "design review this plan", "review the design aspects", or when the full-audit skill runs it. This lens catches visual inconsistencies, design system violations, and craft issues that other audits miss entirely.
 ---
 
 # Audit as Design Engineer
@@ -81,6 +81,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-design-eng.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # Design Engineering Audit: [Plan Title]

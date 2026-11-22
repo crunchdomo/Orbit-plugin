@@ -1,6 +1,6 @@
 ---
 name: audit-as-prod-readiness
-description: Audit an implementation plan for Production Readiness. Use this skill when the user says "audit for production", "production review this plan", "will this work in prod", "is this production ready", or any plan that's about to ship — especially features involving data persistence, process lifecycle, error recovery, environment configuration, or user-facing workflows. This lens catches the failures that only appear in production — environment differences, missing error recovery, deployment gaps, and the "works on my machine" syndrome.
+description: Audit an implementation plan for Production Readiness. Use this skill when the user says "audit for production", "production review this plan", "will this work in prod", "is this production ready", or when the full-audit skill runs it. This lens catches the failures that only appear in production — environment differences, missing error recovery, deployment gaps, and the "works on my machine" syndrome.
 ---
 
 # Audit as Production Readiness Engineer
@@ -97,6 +97,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-prod-readiness.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # Production Readiness Audit: [Plan Title]

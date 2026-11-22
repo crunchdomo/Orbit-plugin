@@ -1,6 +1,6 @@
 ---
 name: audit-as-frontend-eng
-description: Audit an implementation plan through the eyes of a senior Frontend Engineer. Use this skill when the user says "audit as frontend", "frontend review this plan", "review the UI code", or any plan that involves client-side UI components, state management, type definitions, styling, bundle optimization, or rendering performance. This lens catches UI anti-patterns, state management issues, type safety gaps, unnecessary re-renders, and bundle bloat that generalist audits miss.
+description: Audit an implementation plan through the eyes of a senior Frontend Engineer. Use this skill when the user says "audit as frontend", "frontend review this plan", "review the UI code", or when the full-audit skill runs it. This lens catches UI anti-patterns, state management issues, type safety gaps, unnecessary re-renders, and bundle bloat that generalist audits miss.
 ---
 
 # Audit as Frontend Engineer
@@ -84,6 +84,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-frontend-eng.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # Frontend Engineering Audit: [Plan Title]
