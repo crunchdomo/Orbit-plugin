@@ -1,6 +1,6 @@
 ---
 name: audit-as-perf-eng
-description: Audit an implementation plan through the eyes of a Performance Engineer. Use this skill when the user says "audit for performance", "perf review this plan", "will this be fast", "check performance impact", or any plan that could affect runtime performance — new event listeners, state subscriptions, calls across process or network boundaries, file I/O, streaming, rendering changes, process spawning, or features that run in long-lived sessions. This is NOT frontend render perf (that's frontend-eng). This is systems performance — memory over long-running sessions, cross-boundary latency, streaming throughput, resource lifecycle. Long-lived processes can't hide behind a restart.
+description: Audit an implementation plan through the eyes of a Performance Engineer. Use this skill when the user says "audit for performance", "perf review this plan", "will this be fast", "check performance impact", or when the full-audit skill runs it. This is NOT frontend render perf (that's frontend-eng). This is systems performance — memory over long-running sessions, cross-boundary latency, streaming throughput, resource lifecycle. Long-lived processes can't hide behind a restart.
 ---
 
 # Audit as Performance Engineer
@@ -86,6 +86,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-perf-eng.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # Performance Audit: [Plan Title]

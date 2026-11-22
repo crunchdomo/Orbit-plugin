@@ -1,6 +1,6 @@
 ---
 name: audit-as-dx-eng
-description: Audit an implementation plan through the eyes of a Developer Experience (DX) Engineer. Use this skill when the user says "audit as DX", "DX review this plan", "review the developer experience", or any plan that adds or changes something people operate or integrate with through a CLI, API, configuration, error output, onboarding, keyboard shortcuts, or tool output. This lens catches the usability issues specific to technical users that generic UX audits miss because they don't think like someone running or integrating the software.
+description: Audit an implementation plan through the eyes of a Developer Experience (DX) Engineer. Use this skill when the user says "audit as DX", "DX review this plan", "review the developer experience", or when the full-audit skill runs it. This lens catches the usability issues specific to technical users that generic UX audits miss because they don't think like someone running or integrating the software.
 ---
 
 # Audit as DX Engineer
@@ -87,6 +87,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-dx-eng.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # DX Audit: [Plan Title]

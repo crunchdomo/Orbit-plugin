@@ -1,6 +1,6 @@
 ---
 name: audit-as-ux-eng
-description: Audit an implementation plan through the eyes of a UX Engineer. Use this skill when the user says "audit as UX", "UX review this plan", "review the user experience", or any plan that changes how users interact with the product — new features, flow changes, navigation, onboarding, error states, modals, dialogs, or multi-step processes. This lens catches usability issues, broken mental models, missing feedback, and interaction patterns that look fine in code but confuse real users.
+description: Audit an implementation plan through the eyes of a UX Engineer. Use this skill when the user says "audit as UX", "UX review this plan", "review the user experience", or when the full-audit skill runs it. This lens catches usability issues, broken mental models, missing feedback, and interaction patterns that look fine in code but confuse real users.
 ---
 
 # Audit as UX Engineer
@@ -82,6 +82,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-ux-eng.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # UX Audit: [Plan Title]

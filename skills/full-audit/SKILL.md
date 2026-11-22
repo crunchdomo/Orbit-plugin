@@ -148,6 +148,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 
 After ALL lenses have completed, write **ONE file**: `reviews/audit-plan-full.md`
 
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so the report stays out of commits without touching the project's `.gitignore`. Never copy a secret into the report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
+
 Every issue appears **once**, in the master tables at the top. The lens sections below them carry only what the tables cannot: the verdict and the signature section. Do not repeat issues under each lens.
 
 ### Document Structure

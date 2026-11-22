@@ -1,6 +1,6 @@
 ---
 name: audit-as-repo-maintainer
-description: Audit an implementation plan through the eyes of a Repo Maintainer. Use this skill when the user says "audit as repo maintainer", "review conventions", "check code hygiene", "review the file structure", or any plan where you want to verify it follows the project's established patterns — export and module conventions, file placement, naming conventions, import ordering, style reuse, code deduplication, and lint compliance. This lens catches the slow erosion of codebase health that individual feature reviews miss because each violation seems minor in isolation.
+description: Audit an implementation plan through the eyes of a Repo Maintainer. Use this skill when the user says "audit as repo maintainer", "review conventions", "check code hygiene", "review the file structure", or when the full-audit skill runs it. This lens catches the slow erosion of codebase health that individual feature reviews miss because each violation seems minor in isolation.
 ---
 
 # Audit as Repo Maintainer
@@ -95,6 +95,8 @@ A critical issue is a bug, data loss, an outage, a security hole, or a user who 
 ## Output Format
 
 Write the report to `reviews/audit-as-repo-maintainer.md`:
+
+Before writing, add `reviews/` to `.git/info/exclude` if it is not already there, so reports stay out of commits without touching the project's `.gitignore`. Never copy a secret into a report (an API key, token, password, private key or connection string): give the file and line and write `[REDACTED]` in place of the value.
 
 ```markdown
 # Repo Maintenance Audit: [Plan Title]
